@@ -23,7 +23,7 @@ async def on_ready():
     async for m in client.get_channel(PERSONAL_CHANNEL).history():
         await m.delete()
     await client.get_channel(PERSONAL_CHANNEL).send(
-        'Всё было подчищено _вилкой_',
+        'Всё было подчищено _вилкой_!',
         delete_after=5.0
     )
 
