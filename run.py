@@ -10,9 +10,12 @@ COMANDS = {
 # 1) В файле event_handler.py созать функцию // Например: test_func(*args):
 # 2) Добавить как будет выглядеть команда и добавить её в словарь // Например '.test': test_func
 
-TOKEN = 'Njc1MDM0MzgxODgyMDk3Njkz.XjyLHA.KLzvKMI9mSMMmmPOTozbmiIH6y4'
-PERSONAL_CHANNEL = 675036319822381076  # Персональный канал, который обнуляется при запуске бота!
+TOKEN = 'Njc1MDM0MzgxODgyMDk3Njkz.XjyPvw.P6fo_GsGCNAomEAXz9YIUYbTUyE'
+PERSONAL_CHANNEL_ID = 675036319822381076  # Персональный канал, который обнуляется при запуске бота!
+REASON_GUILD_ID = 665628103480967202
 # В текущий момент Причина-->reason
+
+VOICE_CHANNELS = []
 
 client = discord.Client()
 
@@ -20,12 +23,19 @@ client = discord.Client()
 @client.event
 async def on_ready():
     print('Connected')
-    async for m in client.get_channel(PERSONAL_CHANNEL).history():
+    async for m in client.get_channel(PERSONAL_CHANNEL_ID).history():
         await m.delete()
-    await client.get_channel(PERSONAL_CHANNEL).send(
+    await client.get_channel(PERSONAL_CHANNEL_ID).send(
         'Всё было подчищено _вилкой_!',
         delete_after=5.0
     )
+
+    # global VOICE_CHANNELS
+    # VOICE_CHANNELS = client.get_guild(REASON_GUILD_ID).voice_channels
+    #
+    # print(client.get_guild(REASON_GUILD_ID).members)
+    # for channel in VOICE_CHANNELS:
+    #     print([(m.nick + '#' + m.discriminator, m.id) for m in channel.members], (channel.id, channel.name))
 
 
 @client.event
