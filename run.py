@@ -10,7 +10,7 @@ COMANDS = {
 # 1) В файле event_handler.py созать функцию // Например: test_func(*args):
 # 2) Добавить как будет выглядеть команда и добавить её в словарь // Например '.test': test_func
 
-TOKEN = 'Njc1MDM0MzgxODgyMDk3Njkz.XjxRXw.EzrpaU4u2WSgKnNWuEFUGfoWxLI'
+TOKEN = 'Njc1MDM0MzgxODgyMDk3Njkz.XjyLHA.KLzvKMI9mSMMmmPOTozbmiIH6y4'
 PERSONAL_CHANNEL = 675036319822381076  # Персональный канал, который обнуляется при запуске бота!
 # В текущий момент Причина-->reason
 
@@ -22,6 +22,10 @@ async def on_ready():
     print('Connected')
     async for m in client.get_channel(PERSONAL_CHANNEL).history():
         await m.delete()
+    await client.get_channel(PERSONAL_CHANNEL).send(
+        'Всё было подчищено _вилкой_',
+        delete_after=5.0
+    )
 
 
 @client.event
@@ -40,14 +44,12 @@ async def on_message(msg):
         return
 
     if msg.content.startswith('.'):
-        print(msg.channel.id)
         content = msg.content.split()
-
-        await msg.delete(delay=4.5)
         await msg.channel.send(
             COMANDS[content[0] if content[0] in list(COMANDS.keys()) else '.help'](*tuple(content[1:])),
             delete_after=5.0
         )
+        await msg.delete(delay=4.5)
 
 
 client.run(TOKEN)
