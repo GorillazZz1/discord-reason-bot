@@ -1,5 +1,5 @@
 def help(*args):
-    return 'No help for U!'
+    return 'Хуй тебе!'
 
 
 def lmgtfy_search(*args):
