@@ -1,16 +1,19 @@
 import discord
 from event_handler import *
 
-COMANDS = {
-    '.help': help,
-    '.search': lmgtfy_search,
-    '.s': lmgtfy_search,
+COMMANDS = {
+    '.help': {'content': help},
+    '.search': {'content': google_search},
+    '.s': {'content': google_search},
+    '.time': {'content': get_local_time},
+    '.t': {'content': get_local_time},
+    '.anek': {'content': get_random_anek,
+              'tts': True, 'delete_after': 30.0},
+    '.a': {'content': get_random_anek,
+           'tts': True, 'delete_after': None},
 }
-# Список команд, для добавления новой:
-# 1) В файле event_handler.py созать функцию // Например: test_func(*args):
-# 2) Добавить как будет выглядеть команда и добавить её в словарь // Например '.test': test_func
 
-TOKEN = 'Njc1MDM0MzgxODgyMDk3Njkz.XjyPvw.P6fo_GsGCNAomEAXz9YIUYbTUyE'
+TOKEN = 'Njc1MDM0MzgxODgyMDk3Njkz.XjyYcQ.VuMU-CY_9wnYXAQlmnz6eR-I4s4'
 PERSONAL_CHANNEL_ID = 675036319822381076  # Персональный канал, который обнуляется при запуске бота!
 REASON_GUILD_ID = 665628103480967202
 # В текущий момент Причина-->reason
@@ -55,10 +58,43 @@ async def on_message(msg):
 
     if msg.content.startswith('.'):
         content = msg.content.split()
-        await msg.channel.send(
-            COMANDS[content[0] if content[0] in list(COMANDS.keys()) else '.help'](*tuple(content[1:])),
-            delete_after=5.0
-        )
+        command = COMMANDS[content[0] if content[0] in COMMANDS.keys() else '.help']
+        kwargs = {
+            'content': command['content'](*tuple(content[1:])),
+            'delete_after': (command['delete_after'] if 'delete_after' in command.keys() else 5.0),
+            'tts': (command['tts'] if 'tts' in command.keys() else False),
+        }
+        '''
+        kwargs = {
+            'content': None,
+            'delete_after': None,
+            'tts': False,
+            'embed': None,
+            'file': None,
+            'files': None,
+            'nonce': None
+        }
+            content: :class:`str`
+                The content of the message to send.
+            tts: :class:`bool`
+                Indicates if the message should be sent using text-to-speech.
+            embed: :class:`~discord.Embed`
+                The rich embed for the content.
+            file: :class:`~discord.File`
+                The file to upload.
+            files: List[:class:`~discord.File`]
+                A list of files to upload. Must be a maximum of 10.
+            nonce: :class:`int`
+                The nonce to use for sending this message. If the message was successfully sent,
+                then the message will have a nonce with this value.
+            delete_after: :class:`float`
+                If provided, the number of seconds to wait in the background
+                before deleting the message we just sent. If the deletion fails,
+                then it is silently ignored.
+                
+        content=None, *, tts=False, embed=None, file=None, files=None, delete_after=None, nonce=None
+        '''
+        await msg.channel.send(**kwargs)
         await msg.delete(delay=4.5)
 
 
