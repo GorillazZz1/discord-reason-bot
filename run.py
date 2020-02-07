@@ -3,15 +3,21 @@ from event_handler import *
 from secret_token import TOKEN
 
 COMMANDS = {
-    '.help': {'content': help},
+    '.help': {'content': help, 'tts': True},
     '.search': {'content': google_search},
     '.s': {'content': google_search},
     '.time': {'content': get_local_time},
     '.t': {'content': get_local_time},
+    '.banek': {'content': get_random_banek,
+               'tts': True, 'delete_after': 30.0},
+    '.ba': {'content': get_random_banek,
+            'tts': True, 'delete_after': None},
     '.anek': {'content': get_random_anek,
-              'tts': True, 'delete_after': 30.0},
+              'tts': True, 'delete_after': None
+              },
     '.a': {'content': get_random_anek,
-           'tts': True, 'delete_after': None},
+           'tts': True, 'delete_after': None
+           }
 }
 
 PERSONAL_CHANNEL_ID = 675036319822381076  # Персональный канал, который обнуляется при запуске бота!

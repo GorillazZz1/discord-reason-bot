@@ -1,1 +1,1 @@
-TOKEN = 'Njc1MDM0MzgxODgyMDk3Njkz.Xjyo0Q.Y9NTtfigpp-wX8C08SRbemMYIk8'
+TOKEN = 'Njc1MDM0MzgxODgyMDk3Njkz.Xjyplg.uQrR8RBalIF2Bt4fywe7x70R570'
