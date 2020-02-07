@@ -1,5 +1,6 @@
 import discord
 from event_handler import *
+from token import TOKEN
 
 COMMANDS = {
     '.help': {'content': help},
@@ -13,7 +14,6 @@ COMMANDS = {
            'tts': True, 'delete_after': None},
 }
 
-TOKEN = 'Njc1MDM0MzgxODgyMDk3Njkz.XjyYcQ.VuMU-CY_9wnYXAQlmnz6eR-I4s4'
 PERSONAL_CHANNEL_ID = 675036319822381076  # Персональный канал, который обнуляется при запуске бота!
 REASON_GUILD_ID = 665628103480967202
 # В текущий момент Причина-->reason
