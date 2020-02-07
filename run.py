@@ -1,6 +1,6 @@
 import discord
 from event_handler import *
-from token import TOKEN
+from secret_token import TOKEN
 
 COMMANDS = {
     '.help': {'content': help},
